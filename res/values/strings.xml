@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tic Tac Toe</string>
+    <string name="game_title">Hipmunk - Tic Tac Toe Demo</string>
+    <string name="new_game">New Game</string>
+    <string name="x">X</string>
+    <string name="o">O</string>
+    <string name="won">Congrats, You have Won!</string>
+    <string name="game_over">Game Over!</string>
+    <string name="lost">You have lost!</string>
+</resources>
