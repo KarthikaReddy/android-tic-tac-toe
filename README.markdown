@@ -10,10 +10,6 @@
 3. Resizing will work on any display
 4. Simple data structures ensure no lag time
 5. Audio and Animations incorporated for user experience
-
-##Outstanding Features
-1. Game settings {easy|medium|hard}
-  * Currently the computer player picks at random, the addition of offense and defense strategy would be used for medium and hard.
-2. Full Test Suite
-3. Better UI color scheme
+6. All Game Settings, defaulted to Hard
+7. Score Board
 4. Score Board
