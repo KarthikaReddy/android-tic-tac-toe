@@ -33,11 +33,17 @@ public final class R {
         public static final int mirror_ttt_main=0x7f020001;
     }
     public static final class id {
-        public static final int difficulty=0x7f0a0001;
-        public static final int new_game=0x7f0a0000;
+        public static final int difficulty=0x7f0a0005;
+        public static final int loss=0x7f0a0002;
+        public static final int new_game=0x7f0a0004;
+        public static final int score=0x7f0a0006;
+        public static final int textView1=0x7f0a0000;
+        public static final int tie=0x7f0a0003;
+        public static final int won=0x7f0a0001;
     }
     public static final class layout {
         public static final int main=0x7f030000;
+        public static final int stats=0x7f030001;
     }
     public static final class menu {
         public static final int menu=0x7f090000;
@@ -53,13 +59,18 @@ public final class R {
         public static final int game_over=0x7f080007;
         public static final int game_title=0x7f080001;
         public static final int hard_label=0x7f08000c;
+        public static final int loss_stat=0x7f080010;
         public static final int lost=0x7f080008;
         public static final int medium_label=0x7f08000b;
         public static final int new_game=0x7f080002;
         public static final int new_game_title=0x7f080009;
         public static final int o=0x7f080005;
+        public static final int score=0x7f08000d;
+        public static final int scoreboard=0x7f08000e;
         public static final int set_difficutly=0x7f080003;
+        public static final int tie_stat=0x7f080011;
         public static final int won=0x7f080006;
+        public static final int won_stat=0x7f08000f;
         public static final int x=0x7f080004;
     }
 }

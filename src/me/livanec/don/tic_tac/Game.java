@@ -2,13 +2,14 @@ package me.livanec.don.tic_tac;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 
 import me.livanec.don.tic_tac.helper.Difficulty;
 import me.livanec.don.tic_tac.helper.GameSession;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,10 +22,14 @@ import android.widget.Toast;
 public class Game extends Activity {
 	private static final int NO_MOVE_SET = -1;
 	private static final String TAG = Game.class.getSimpleName();
+	private SharedPreferences preferences;
 	private GameSession session;
 	private BoardView boardView;
 	private MediaPlayer mp;
 	private Difficulty difficulty;
+	private long won;
+	private long loss;
+	private long tie;
 
 	static final int[][][] allSolutions = { { { 1, 2 }, { 3, 6 }, { 4, 8 } }, { { 0, 2 }, { 4, 7 } },
 			{ { 0, 1 }, { 4, 6 }, { 5, 8 } }, { { 0, 6 }, { 4, 5 } }, { { 1, 7 }, { 3, 5 }, { 2, 6 }, { 0, 8 } },
@@ -34,11 +39,22 @@ public class Game extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		difficulty = Difficulty.Medium;
+		difficulty = Difficulty.Hard;
 		Log.d(TAG, "onCreate");
 		startNewGame();
+		final Object data = getLastNonConfigurationInstance();
+		if (data!=null)
+			session = (GameSession) data;
+		initStats();
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		mp = MediaPlayer.create(this, R.raw.outstanding);
+	}
+
+	private void initStats() {
+		preferences = getSharedPreferences(getString(R.string.scoreboard), 0);
+		won = preferences.getLong(getString(R.string.won_stat), 0);
+		loss = preferences.getLong(getString(R.string.loss_stat), 0);
+		tie = preferences.getLong(getString(R.string.tie_stat), 0);
 	}
 
 	private void startNewGame() {
@@ -69,9 +85,11 @@ public class Game extends Activity {
 		if (isWinner(value, session.getUserPicks())) {
 			mp.start();
 			Toast.makeText(this, getResources().getString(R.string.won), Toast.LENGTH_SHORT).show();
+			preferences.edit().putLong(getString(R.string.won_stat), ++won).commit();
 		} else if (session.getUnselected().size() == 0) {
 			session.setGameOver(true);
 			Toast.makeText(this, getResources().getString(R.string.game_over), Toast.LENGTH_SHORT).show();
+			preferences.edit().putLong(getString(R.string.tie_stat), ++tie).commit();
 		}
 		return true;
 	}
@@ -139,9 +157,11 @@ public class Game extends Activity {
 	private void checkForWinner(int move) {
 		if (isWinner(move, session.getCompPicks())) {
 			Toast.makeText(this, getResources().getString(R.string.lost), Toast.LENGTH_SHORT).show();
+			preferences.edit().putLong(getString(R.string.loss_stat), ++loss).commit();
 		} else if (session.getUnselected().size() == 0) {
 			session.setGameOver(true);
 			Toast.makeText(this, getResources().getString(R.string.game_over), Toast.LENGTH_SHORT).show();
+			preferences.edit().putLong(getString(R.string.tie_stat), ++tie).commit();
 		}
 	}
 
@@ -171,6 +191,9 @@ public class Game extends Activity {
 							startNewGame(difficulty);
 						}
 					}).show();
+			break;
+		case R.id.score:
+			startActivity(new Intent(this, ScoreBoard.class));
 			break;
 		}
 		return true;
@@ -355,5 +378,12 @@ public class Game extends Activity {
 	public void setSession(GameSession session) {
 		this.session = session;
 	}
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		return session;
+	}
+	
+	
 
 }

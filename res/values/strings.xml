@@ -13,4 +13,9 @@
 	<string name="easy_label">Easy</string>
 	<string name="medium_label">Medium</string>
 	<string name="hard_label">Hard</string>
+	<string name="score">Score</string>
+	<string name="scoreboard">score_preferences</string>
+	<string name="won_stat">won</string>
+	<string name="loss_stat">loss</string>
+	<string name="tie_stat">tie</string>
 </resources>

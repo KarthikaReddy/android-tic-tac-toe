@@ -11,6 +11,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".Game" android:label="@string/game_title" />
+		<activity android:name=".ScoreBoard" android:label="@string/score" />
 	</application>
 	<uses-sdk android:minSdkVersion="6" />
 
