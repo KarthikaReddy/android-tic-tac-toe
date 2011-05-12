@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameSession {
+	public static final int CENTER_SQUARE = 4;
 	private static final String TAG = GameSession.class.getSimpleName();
 	private boolean userSelected;
 	private boolean isGameOver;
 	private boolean isWinner;
 
+	private Difficulty difficulty;
 	private int puzzle[];
 	private int userPicks[];
 	private int compPicks[];
@@ -17,8 +19,13 @@ public class GameSession {
 	private int compPickCount;
 
 	private ArrayList<Integer> unselected;
+	
+	public boolean isCenterOpen(){
+		return getPuzzle()[CENTER_SQUARE]==0;
+	}
 
-	public GameSession() {
+	public GameSession(Difficulty difficulty) {
+		setDifficulty(difficulty);
 		setGameOver(false);
 		puzzle = new int[9];
 		userPicks = new int[5];
@@ -118,14 +125,20 @@ public class GameSession {
 	public void setWinningSeries(int[] winningSeries) {
 		this.winningSeries = winningSeries;
 	}
-	
+
 	public void setWinningSeries(int[] series, int pick) {
 		this.winningSeries[0] = pick;
 		this.winningSeries[1] = series[0];
 		this.winningSeries[2] = series[1];
 		Arrays.sort(this.winningSeries);
 	}
-	
-	
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
 
 }

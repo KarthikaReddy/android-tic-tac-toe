@@ -7,7 +7,7 @@ import android.view.Window;
 
 public class TicTac extends Activity {
 	protected boolean _active = true;
-	protected int _splashTime = 3000; 
+	protected int _splashTime = 500; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
